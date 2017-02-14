@@ -1,12 +1,107 @@
-﻿<Window x:Class="U23CCD.MainWindow"
+﻿<metro:MetroWindow x:Class="U23CCD.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:bing="clr-namespace:BingLibrary.hjb;assembly=BingLibrary"
+        xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:U23CCD"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:log="clr-namespace:BingLibrary.OutLog;assembly=OutLog"                   
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="长度测试CCD" Height="600" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <local:NiImageView></local:NiImageView>
+        <TabControl>
+            <TabItem Header="运行界面">
+                <Grid DataContext="{bing:Data md}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <local:NiImageView NIImageViewer="{Binding img3}"></local:NiImageView>
+                        <GroupBox Grid.Row="1" Header="信息框">
+                            <Grid x:Name="currentmessage">
+                                <log:LogWindow></log:LogWindow>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <!--<Grid.RowDefinitions>
+                            <RowDefinition Height="4*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                        </Grid.RowDefinitions>-->
+                        <Grid Grid.Row="0">
+                            <Grid.Resources>
+                                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+                            </Grid.Resources>
+                            <TabControl BorderBrush="Green" Margin="10" >
+                                <Controls:MetroTabItem Header="运行信息"
+                                 Controls:ControlsHelper.HeaderFontSize="18">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Vertical">
+                                            <GroupBox Header="串口状态">
+                                                <StackPanel VerticalAlignment="Center"  Orientation="Horizontal" x:Name="serial">
+                                                    <TextBox Text="{Binding com}" Height="25" Width="100" TextAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"></TextBox>
+                                                    <Label DataContext="{bing:Data md}" Content="{Binding comstatus}" VerticalAlignment="Center" Margin="5,0,0,0"></Label>
+                                                    <Button Content="open" Command="{bing:ActionAuto CameraInit}" Margin="5" Height="20" Width="50"></Button>
+                                                    <Button Content="CLOSE" Command="{bing:ActionAuto CameraClose}" Margin="5" Height="20" Width="50"></Button>
+                                                    <Button Content="拍照" Command="{bing:ActionAuto CameraInspect}" Margin="5" Height="20" Width="50"></Button>
+                                                </StackPanel>
+                                            </GroupBox>
+                                            <GroupBox Header="视觉引擎">
+                                                <Grid>
+                                                    <StackPanel  Orientation="Horizontal">
+                                                        <Button  Background="{Binding BC}" Margin="3" Height="160" Width="160" HorizontalAlignment="Left"   Content="{Binding Receive}" FontSize="50"></Button>
+                                                        <StackPanel>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Label Content="下限："></Label>
+                                                                <TextBox TextAlignment="Center" Text="{Binding LineDown}" Margin="3" Height="30" Width="60"></TextBox>
+                                                                <Label Content="上限："></Label>
+                                                                <TextBox TextAlignment="Center" Text="{Binding LineUp}" Margin="3" Height="30" Width="60"></TextBox>
+                                                            </StackPanel>
+                                                            <Label Content="长度："></Label>
+                                                            <TextBox TextAlignment="Center" Text="{Binding Line}" Margin="3" Height="30" Width="230"></TextBox>
+
+                                                        </StackPanel>
+
+                                                    </StackPanel>
+
+                                                </Grid>
+                                            </GroupBox>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label Content="条码："></Label>
+                                                <TextBox TextAlignment="Center" Text="{Binding BarCode}"  FontSize="30" Foreground="{Binding FB}" Margin="3" Height="50" Width="330"></TextBox>
+
+                                            </StackPanel>
+                                            <GroupBox Header="保存地址">
+                                                <TextBox Text="{Binding Adress}"></TextBox>
+                                            </GroupBox>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Controls:MetroTabItem>
+                            </TabControl>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+
+                                <RowDefinition Height="6*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="帮助">
+                <ScrollViewer>
+                    <DocumentViewer x:Name="Helps">
+                    </DocumentViewer>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+        <!--<local:NiImageView></local:NiImageView>-->
     </Grid>
-</Window>
+</metro:MetroWindow>
