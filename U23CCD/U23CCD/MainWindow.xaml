@@ -9,7 +9,7 @@
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:log="clr-namespace:BingLibrary.OutLog;assembly=OutLog"                   
         mc:Ignorable="d"
-        Title="长度测试CCD" Height="600" Width="800" WindowStartupLocation="CenterScreen">
+        Title="长度测试CCD" Icon="1.ico" Height="600" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <TabControl>
             <TabItem Header="运行界面">
